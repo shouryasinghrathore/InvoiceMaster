@@ -1,7 +1,7 @@
 const route = require('express').Router();
 const Invoice = require('../models/invoice')
 
-const{invoiceGenerator,deleteInvoice,showAllInvoices}= require("../controllers/invoiceController"); 
+const { invoiceGenerator, deleteInvoice, showAllInvoices, updateInvoice } = require("../controllers/invoiceController");
 
 route.get('/', (req, res) => {
     res.status(200).json({
@@ -11,9 +11,10 @@ route.get('/', (req, res) => {
 })
 
 
-route.post('/invoices',  invoiceGenerator);
-route.get('/showAllinvoices',showAllInvoices);
-route.delete('/delete/:id',deleteInvoice);
+route.post('/invoices', invoiceGenerator);
+route.get('/showAllinvoices', showAllInvoices);
+route.delete('/delete/:id', deleteInvoice);
+route.put('/updateInvoice/:id', updateInvoice);
 
 
 module.exports = route

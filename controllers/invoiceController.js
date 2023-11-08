@@ -89,3 +89,34 @@ exports.showAllInvoices = async (req, res) => {
         })
     }
 }
+
+exports.updateInvoice = async (req, res) => {
+try {
+    const { id } = req.params;
+    const { gstNumber, customerName, items } = req.body;
+
+        if (!id) {
+            res.json({
+                error: "enter the value of id"
+            })
+        }
+        const result = await Invoice.findByIdAndUpdate({ _id: id },{gstNumber: gstNumber, customerName: customerName,items:items},{new:true});
+        if (!result) {
+            res.json({
+                result: "invoice not found"
+            })
+        }
+        res.status(200).json({
+            success: true,
+            result: "invoice updated successfully"
+        })
+
+} catch (error) {
+    console.log(error)
+    return res.status(500).json({
+        success: false,
+        error: error.message
+    })
+}
+
+}
