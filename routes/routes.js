@@ -10,8 +10,8 @@ route.get('/', (req, res) => {
 })
 
 
-route.post('/invoices', invoiceGenerator);
 route.get('/showAllinvoices', showAllInvoices);
+route.post('/invoices', invoiceGenerator);
 route.delete('/delete/:id', deleteInvoice);
 route.put('/updateInvoice/:id', updateInvoice);
 

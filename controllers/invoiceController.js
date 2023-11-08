@@ -15,7 +15,7 @@ exports.deleteInvoice = async (req, res) => {
                 result: "invoice not found"
             })
         }
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             result: "invoice delete successfully"
         })
@@ -47,7 +47,7 @@ exports.invoiceGenerator = async (req, res) => {
 
         // console.log("taxableAmount->", taxableAmount)
         // console.log("totalPayableAmount->", totalPayableAmount)
-        
+
         const invoice = new Invoice({
             gstNumber,
             customerName,
@@ -58,7 +58,7 @@ exports.invoiceGenerator = async (req, res) => {
 
         await invoice.save();
 
-        res.status(201).json({
+       return res.status(201).json({
             success: true,
             invoice: invoice,
         });
@@ -76,7 +76,7 @@ exports.showAllInvoices = async (req, res) => {
     try {
         const Result = await Invoice.find({});
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             result: Result,
         })
@@ -107,9 +107,10 @@ try {
                 result: "invoice not found"
             })
         }
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
-            result: "invoice updated successfully"
+            result: "invoice updated successfully",
+            updatedUser:result
         })
 
 } catch (error) {
