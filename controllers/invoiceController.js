@@ -38,7 +38,7 @@ exports.invoiceGenerator = async (req, res) => {
 
         items.forEach(item => {
             const { quantity, gstRate, Amount } = item;
-            const itemTaxableAmount = (Amount) * quantity * (gstRate / 100);
+            const itemTaxableAmount = (Amount * quantity) * (gstRate / 100);
             taxableAmount += itemTaxableAmount;
             totalPayableAmount += (Amount * quantity) + itemTaxableAmount;
 
@@ -47,6 +47,7 @@ exports.invoiceGenerator = async (req, res) => {
 
         // console.log("taxableAmount->", taxableAmount)
         // console.log("totalPayableAmount->", totalPayableAmount)
+        
         const invoice = new Invoice({
             gstNumber,
             customerName,

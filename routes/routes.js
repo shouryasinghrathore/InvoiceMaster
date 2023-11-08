@@ -1,5 +1,4 @@
 const route = require('express').Router();
-const Invoice = require('../models/invoice')
 
 const { invoiceGenerator, deleteInvoice, showAllInvoices, updateInvoice } = require("../controllers/invoiceController");
 
